@@ -43,12 +43,4 @@ public class PoliticaSeguranca extends BaseEntity {
             throw new IllegalArgumentException("Limite vazio ou inválido.");
         }
     }
-
-    @Override
-    public void mostrarDados() {
-        System.out.println("=== Políticas de Segurança ===");
-        System.out.println("- ID:" + id);
-        System.out.println("- Versão:" + versaoHomologada);
-        System.out.println("- Limite:" + limiteFinanceiroTeto);
-    }
 }
