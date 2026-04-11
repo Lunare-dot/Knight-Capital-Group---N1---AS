@@ -52,25 +52,25 @@ public class Servidor extends BaseEntity {
         this.status = status;
     }
 
-    public void validarHostname(String hostname) {
+    private void validarHostname(String hostname) {
         if(hostname == null || hostname.isEmpty()) {
             throw new IllegalArgumentException("Hostname vazio ou inválido.");
         }
     }
 
-    public void validarVersaoInstalada(String versaoInstalada) {
+    private void validarVersaoInstalada(String versaoInstalada) {
         if(versaoInstalada == null || versaoInstalada.isEmpty()) {
             throw new IllegalArgumentException("Versão instalada inválida.");
         }
     }
 
-    public void validarPoliticaSeguranca(PoliticaSeguranca politica) {
+    private void validarPoliticaSeguranca(PoliticaSeguranca politica) {
         if(politica == null) {
             throw new IllegalArgumentException("Política de Segurança violada.");
         }
     }
 
-    public void validarStatusOperacional(StatusOperacional status) {
+    private void validarStatusOperacional(StatusOperacional status) {
         if(status == null) {
             throw new IllegalArgumentException("Status inválido.");
         }
