@@ -39,7 +39,7 @@ public class PoliticaSeguranca extends BaseEntity {
     }
 
     private void validarLimiteFinanceiroTeto(Long limiteFinanceiroTeto) {
-        if(limiteFinanceiroTeto == null || limiteFinanceiroTeto == 0) {
+        if(limiteFinanceiroTeto == null || limiteFinanceiroTeto < 0) {
             throw new IllegalArgumentException("Limite vazio ou inválido.");
         }
     }
