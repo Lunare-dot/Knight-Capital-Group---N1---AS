@@ -1,4 +1,4 @@
-package com.kcg.trading_system.controller;
+package com.kcg.trading_system.exception;
 
 public class GlobalExceptionHandler {
     
