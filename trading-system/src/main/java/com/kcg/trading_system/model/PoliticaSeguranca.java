@@ -35,7 +35,7 @@ public class PoliticaSeguranca extends BaseEntity {
     }
 
     private void validarVersaoHomologada(String versaoHomologada) {
-        if(versaoHomologada == null || versaoHomologada.isEmpty()) {
+        if(versaoHomologada == null || versaoHomologada.isBlank()) {
             throw new IllegalArgumentException("Versão inválida.");
         }
     }

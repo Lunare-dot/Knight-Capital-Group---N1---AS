@@ -71,7 +71,7 @@ public class OrdemNegociacao extends BaseEntity {
     }
 
     private void validarValorTotal(Double valorTotal) {
-        if(valorTotal == null || valorTotal < 0) {
+        if(valorTotal == null || valorTotal <= 0) {
             throw new IllegalArgumentException("Valor total vazio ou inválido.");
         }
     }

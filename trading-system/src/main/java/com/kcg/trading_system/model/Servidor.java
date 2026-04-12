@@ -53,13 +53,13 @@ public class Servidor extends BaseEntity {
     }
 
     private void validarHostname(String hostname) {
-        if(hostname == null || hostname.isEmpty()) {
+        if(hostname == null || hostname.isBlank()) {
             throw new IllegalArgumentException("Hostname vazio ou inválido.");
         }
     }
 
     private void validarVersaoInstalada(String versaoInstalada) {
-        if(versaoInstalada == null || versaoInstalada.isEmpty()) {
+        if(versaoInstalada == null || versaoInstalada.isBlank()) {
             throw new IllegalArgumentException("Versão instalada inválida.");
         }
     }
