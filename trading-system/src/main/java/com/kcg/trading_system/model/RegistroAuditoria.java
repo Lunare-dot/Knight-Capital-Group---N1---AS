@@ -3,7 +3,16 @@ package com.kcg.trading_system.model;
 import java.time.LocalDateTime;
 
 public class RegistroAuditoria extends BaseEntity {
-    private String tipoEvento;
+    public enum TipoEvento {
+        ORDEM_ENVIADA,
+        ORDEM_REJEITADA,
+        ANOMALIA_DETECTADA,
+        OPERACAO_INTERROMPIDA,
+        DEPLOY_REALIZADO,
+        DEPLOY_INCONSISTENTE
+    }
+
+    private TipoEvento tipoEvento;
     private String mensagemDetalhada;
     private LocalDateTime timestamp;
     private String ordemId;
@@ -12,7 +21,7 @@ public class RegistroAuditoria extends BaseEntity {
         super();
     }
 
-    public RegistroAuditoria(String tipoEvento, String mensagemDetalhada, LocalDateTime timestamp, String ordemId) {
+    public RegistroAuditoria(TipoEvento tipoEvento, String mensagemDetalhada, LocalDateTime timestamp, String ordemId) {
         super();
         setTipoEvento(tipoEvento);
         setMensagemDetalhada(mensagemDetalhada);
@@ -20,7 +29,7 @@ public class RegistroAuditoria extends BaseEntity {
         setOrdemId(ordemId);
     }
 
-    public RegistroAuditoria(String id, String tipoEvento, String mensagemDetalhada, LocalDateTime timestamp, String ordemId) {
+    public RegistroAuditoria(String id, TipoEvento tipoEvento, String mensagemDetalhada, LocalDateTime timestamp, String ordemId) {
         super(id);
         setTipoEvento(tipoEvento);
         setMensagemDetalhada(mensagemDetalhada);
@@ -28,8 +37,8 @@ public class RegistroAuditoria extends BaseEntity {
         setOrdemId(ordemId);
     }
 
-    public String getTipoEvento() { return tipoEvento; }
-    public void setTipoEvento(String tipoEvento) {
+    public TipoEvento getTipoEvento() { return tipoEvento; }
+    public void setTipoEvento(TipoEvento tipoEvento) {
         verificarTipoEvento(tipoEvento);
         this.tipoEvento = tipoEvento;
     }
@@ -51,9 +60,9 @@ public class RegistroAuditoria extends BaseEntity {
         this.ordemId = ordemId;
     }
 
-    private void verificarTipoEvento(String tipoEvento) {
-        if(tipoEvento == null || tipoEvento.isBlank()) {
-            throw new IllegalArgumentException("Tipo de evento vazio ou inválido.");
+    private void verificarTipoEvento(TipoEvento tipoEvento) {
+        if(tipoEvento == null) {
+            throw new IllegalArgumentException("Tipo de evento inválido.");
         }
     }
 
