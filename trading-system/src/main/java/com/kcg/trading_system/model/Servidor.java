@@ -1,7 +1,7 @@
 package com.kcg.trading_system.model;
 
 public class Servidor extends BaseEntity {
-    public enum StatusOperacional { LIGADO, DESLIGADO, INDISPONÍVEL }
+    public enum StatusOperacional { LIGADO, DESLIGADO, INDISPONIVEL }
 
     private String hostname;
     private String versaoInstalada;
@@ -15,16 +15,16 @@ public class Servidor extends BaseEntity {
     public Servidor(String hostname, String versaoInstalada, PoliticaSeguranca politica, StatusOperacional status) {
         super();
         setHostname(hostname);
-        setVersaoInstalda(versaoInstalada);
-        setPoliticaSegurança(politica);
+        setVersaoInstalada(versaoInstalada);
+        setPoliticaSeguranca(politica);
         setStatusOperacional(status);
     }
 
     public Servidor(String id, String hostname, String versaoInstalada, PoliticaSeguranca politica, StatusOperacional status) {
         super(id);
         setHostname(hostname);
-        setVersaoInstalda(versaoInstalada);
-        setPoliticaSegurança(politica);
+        setVersaoInstalada(versaoInstalada);
+        setPoliticaSeguranca(politica);
         setStatusOperacional(status);
     }
 
@@ -35,13 +35,13 @@ public class Servidor extends BaseEntity {
     }
 
     public String getVersaoInstalada() { return versaoInstalada; }
-    public void setVersaoInstalda(String versaoInstalada) {
+    public void setVersaoInstalada(String versaoInstalada) {
         validarVersaoInstalada(versaoInstalada);
         this.versaoInstalada = versaoInstalada;
     }
 
-    public PoliticaSeguranca getPoliticaSegurança() { return politica; }
-    public void setPoliticaSegurança(PoliticaSeguranca politica) {
+    public PoliticaSeguranca getPoliticaSeguranca() { return politica; }
+    public void setPoliticaSeguranca(PoliticaSeguranca politica) {
         validarPoliticaSeguranca(politica);
         this.politica = politica;
     }

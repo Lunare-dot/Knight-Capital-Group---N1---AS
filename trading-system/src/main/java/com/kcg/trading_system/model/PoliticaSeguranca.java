@@ -1,20 +1,22 @@
 package com.kcg.trading_system.model;
 
+import java.math.BigDecimal;
+
 public class PoliticaSeguranca extends BaseEntity {
     private String versaoHomologada;
-    private Long limiteFinanceiroTeto;
+    private BigDecimal limiteFinanceiroTeto;
 
     public PoliticaSeguranca() {
         super();
     }
 
-    public PoliticaSeguranca(String versaoHomologada, Long limiteFinanceiroTeto) {
+    public PoliticaSeguranca(String versaoHomologada, BigDecimal limiteFinanceiroTeto) {
         super();
         setVersaoHomologada(versaoHomologada);
         setLimiteFinanceiroTeto(limiteFinanceiroTeto);
     }
 
-    public PoliticaSeguranca(String id, String versaoHomologada, Long limiteFinanceiroTeto) {
+    public PoliticaSeguranca(String id, String versaoHomologada, BigDecimal limiteFinanceiroTeto) {
         super(id);
         setVersaoHomologada(versaoHomologada);
         setLimiteFinanceiroTeto(limiteFinanceiroTeto);
@@ -26,8 +28,8 @@ public class PoliticaSeguranca extends BaseEntity {
         this.versaoHomologada = versaoHomologada;
     }
 
-    public Long getLimiteFinanceiroTeto() { return limiteFinanceiroTeto; }
-    public void setLimiteFinanceiroTeto(Long limiteFinanceiroTeto) {
+    public BigDecimal getLimiteFinanceiroTeto() { return limiteFinanceiroTeto; }
+    public void setLimiteFinanceiroTeto(BigDecimal limiteFinanceiroTeto) {
         validarLimiteFinanceiroTeto(limiteFinanceiroTeto);
         this.limiteFinanceiroTeto = limiteFinanceiroTeto;
     }
@@ -38,8 +40,8 @@ public class PoliticaSeguranca extends BaseEntity {
         }
     }
 
-    private void validarLimiteFinanceiroTeto(Long limiteFinanceiroTeto) {
-        if(limiteFinanceiroTeto == null || limiteFinanceiroTeto < 0) {
+    private void validarLimiteFinanceiroTeto(BigDecimal limiteFinanceiroTeto) {
+        if(limiteFinanceiroTeto == null || limiteFinanceiroTeto.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Limite vazio ou inválido.");
         }
     }

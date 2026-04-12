@@ -3,31 +3,31 @@ package com.kcg.trading_system.model;
 import java.time.LocalDateTime;
 
 public class OrdemNegociacao extends BaseEntity {
-    private enum StatusFinal { APROVADO, REJEITADO }
+    public enum StatusFinal { APROVADO, REJEITADO, PENDENTE }
 
     private LocalDateTime dataHora;
     private StatusFinal status;
     private Double valorTotal;
-    private Servidor servidor;
+    private String servidorId;
 
     public OrdemNegociacao() {
         super();
     }
 
-    public OrdemNegociacao(LocalDateTime dataHora, StatusFinal status, Double valorTotal, Servidor servidor) {
+    public OrdemNegociacao(LocalDateTime dataHora, StatusFinal status, Double valorTotal, String servidorId) {
         super();
         setDataHora(dataHora);
         setStatusFinal(status);
         setValorTotal(valorTotal);
-        setServidor(servidor);
+        setServidorId(servidorId);
     }
 
-    public OrdemNegociacao(String id, LocalDateTime dataHora, StatusFinal status, Double valorTotal, Servidor servidor) {
+    public OrdemNegociacao(String id, LocalDateTime dataHora, StatusFinal status, Double valorTotal, String servidorId) {
         super(id);
         setDataHora(dataHora);
         setStatusFinal(status);
         setValorTotal(valorTotal);
-        setServidor(servidor);
+        setServidorId(servidorId);
     }
 
     public LocalDateTime getDataHora() { return dataHora; }
@@ -48,10 +48,10 @@ public class OrdemNegociacao extends BaseEntity {
         this.valorTotal = valorTotal;
     }
 
-    public Servidor getServidor() { return servidor; }
-    public void setServidor(Servidor servidor) {
-        validarServidor(servidor);
-        this.servidor = servidor;
+    public String getServidorId() { return servidorId; }
+    public void setServidorId(String servidorId) {
+        validarServidor(servidorId);
+        this.servidorId = servidorId;
     }
 
     private void validarDataHora(LocalDateTime dataHora) {
@@ -59,7 +59,7 @@ public class OrdemNegociacao extends BaseEntity {
             throw new IllegalArgumentException("Data e hora inválidas.");
         }
 
-        if(dataHora.isAfter(LocalDateTime.now())) {
+        if(dataHora.isAfter(LocalDateTime.now().plusSeconds(1))) {
             throw new IllegalArgumentException("A data e hora da negociação não podem ser no futuro.");
         }
     }
@@ -76,9 +76,9 @@ public class OrdemNegociacao extends BaseEntity {
         }
     }
 
-    private void validarServidor(Servidor servidor) {
-        if(servidor == null) {
-            throw new IllegalArgumentException("Servidor não encontrado ou indisponível.");
+    private void validarServidor(String servidorId) {
+        if(servidorId == null || servidorId.isBlank()) {
+            throw new IllegalArgumentException("ID do servidor inválido.");
         }
     }
 }
