@@ -79,7 +79,6 @@ public class TradingService {
 
             throw new AnomaliaDetectadaException("Valor da ordem ultrapassa o limite permitido.");
         }
-
         processarOrdem(ordem);
     }
 
@@ -116,7 +115,7 @@ public class TradingService {
                 "Deploy inconsistente detectado na incialização", 
                 null
             );
-
+            interromperOperacoes();
             throw new DeployInconsistenteException("Deploy inconsistente detectado!");
         }
     }
