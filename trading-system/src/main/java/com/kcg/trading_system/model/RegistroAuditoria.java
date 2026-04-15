@@ -77,4 +77,10 @@ public class RegistroAuditoria extends BaseEntity {
             throw new IllegalArgumentException("Timestamp do registro inválido.");
         }
     }
+
+    @Override
+    public String toString() {
+        return "[" + timestamp + "]" + tipoEvento + " - " + mensagemDetalhada +
+                (ordemId != null ? " (ordem: " + ordemId + ")" : "");
+    }
 }
