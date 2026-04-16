@@ -90,7 +90,7 @@ Os diagramas da solução estão disponíveis em:
 
 ---
 
-## Importante - Postman
+## Importante - Execução com Newman
 
 ### Não atualizar a collection para v3 (YAML).
 
