@@ -49,8 +49,10 @@ public class DeployController {
     @GetMapping("/servidores/{id}")
     public ResponseEntity<Servidor> buscarServidor(@PathVariable String id) {
         return MockData.SERVIDORES.stream()
-                .filter(s -> s.getId().equals(id))
-                .findFirst()
+                .filter(s -> 
+                    s.getId().equals(id) ||
+                    s.getHostname().equals(id)
+                ).findFirst()
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
