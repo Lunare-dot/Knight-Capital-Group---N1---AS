@@ -66,7 +66,9 @@ A aplicação sobe em `http://localhost:8080`.
 ## Diagramas UML
 
 Os diagramas da solução estão disponíveis em:
-|`/docs/uml/`|
+``
+`/docs/uml/`
+``
 
 ### Incluem:
 ```
@@ -80,7 +82,9 @@ Os diagramas da solução estão disponíveis em:
 
 ## Testes Automatizados (Postman + Newman)
 ### Localização dos arquivos
-|`/postman/collections/trading_tests.json`|
+``
+`/postman/collections/trading_tests.json`
+``
 
 ---
 
@@ -89,7 +93,9 @@ Os diagramas da solução estão disponíveis em:
 ### Não atualizar a collection para v3 (YAML).
 
 O Postman pode exibir o aviso:
-|"Upgrade files - Postman no longer supports JSON..."
+```
+"Upgrade files - Postman no longer supports JSON..."
+```
 
 ### IGNORE esse aviso.
 
@@ -104,12 +110,18 @@ Atualizar para v3:
 ## Executando os testes
 
 ### Instalar o Newman:
-**</> Bash**
-|npm install -g newman|
+</> Bash
+```
+npm install -g newman
+```
 
 ### Executar:
-**</> Bash**
-|newman run postman/collections/trading_tests.json|
+</> Bash
+```
+newman run postman/collections/trading_tests.json
+```
+
+---
 
 ## Cenário simulado (MockData)
 
