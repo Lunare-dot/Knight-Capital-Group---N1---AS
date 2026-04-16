@@ -63,6 +63,54 @@ A aplicação sobe em `http://localhost:8080`.
 
 ---
 
+## Diagramas UML
+
+Os diagramas da solução estão disponíveis em:
+|`/docs/uml/`|
+
+### Incluem:
+```
+- DER (Entidade-Relacionamento)
+- Diagrama de Classe
+- Diagrama de Caso de Uso
+- Diagrama de Atividade
+- Diagrama Arquitetural N-Tier
+```
+---
+
+## Testes Automatizados (Postman + Newman)
+### Localização dos arquivos
+|`/postman/collections/trading_tests.json`|
+
+---
+
+## Importante - Postman
+
+### Não atualizar a collection para v3 (YAML).
+
+O Postman pode exibir o aviso:
+|"Upgrade files - Postman no longer supports JSON..."
+
+### IGNORE esse aviso.
+
+Atualizar para v3:
+
+- pode corromper o arquivo
+- pode transformar o `trading_tests.json` em diretório
+- quebra a execução via Newman
+
+---
+
+## Executando os testes
+
+### Instalar o Newman:
+**</> Bash**
+|npm install -g newman|
+
+### Executar:
+**</> Bash**
+|newman run postman/collections/trading_tests.json|
+
 ## Cenário simulado (MockData)
 
 O `MockData` simula fielmente o contexto do desastre KCG:
