@@ -1,0 +1,303 @@
+{
+  "info": {
+    "name": "Trading API Tests",
+    "_postman_id": "c1a2b3c4-d5e6-7890-abcd-ef1234567890",
+    "description": "Testes automatizados da API de trading",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1 - Listar servidores",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/deploy/servidores"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "2 - Buscar servidor válido",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/deploy/servidores/srv-01"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "3 - Buscar servidor legado",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/deploy/servidores/srv-08"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "4 - Buscar servidor inexistente",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/deploy/servidores/id-inexistente"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 404\", function () {",
+              "    pm.response.to.have.status(404);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "5 - Verificar deploy",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/deploy/verificar"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 409\", function () {",
+              "    pm.response.to.have.status(409);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "6 - Listar auditoria inicial",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/trading/auditoria"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "7 - Ordem válida",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"tickerAcao\": \"AAPL\",\n  \"quantidade\": 100,\n  \"servidorId\": \"srv-01\"\n}"
+        },
+        "url": "{{baseUrl}}/trading/ordem"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "8 - Ordem acima do limite",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"tickerAcao\": \"JPM\",\n  \"quantidade\": 8500000,\n  \"servidorId\": \"srv-02\"\n}"
+        },
+        "url": "{{baseUrl}}/trading/ordem"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 400\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "9 - Ordem servidor legado",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"tickerAcao\": \"GOOGL\",\n  \"quantidade\": 50,\n  \"servidorId\": \"srv-08\"\n}"
+        },
+        "url": "{{baseUrl}}/trading/ordem"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 409\", function () {",
+              "    pm.response.to.have.status(409);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "10 - Ordem servidor inexistente",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"tickerAcao\": \"TSLA\",\n  \"quantidade\": 10,\n  \"servidorId\": \"srv-99\"\n}"
+        },
+        "url": "{{baseUrl}}/trading/ordem"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 500\", function () {",
+              "    pm.response.to.have.status(500);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "11 - Iniciar operações",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/trading/iniciar"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 409\", function () {",
+              "    pm.response.to.have.status(409);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "12 - Interromper operações",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/trading/interromper"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "13 - Auditoria final",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/trading/auditoria"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}
