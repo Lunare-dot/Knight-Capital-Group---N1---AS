@@ -1,0 +1,87 @@
+Testes REST (Postman)
+Execute os testes na ordem abaixo. Base URL: http://localhost:8080
+1. Listar todos os servidores
+GET /deploy/servidores
+
+Copie o id dos servidores srv-01 e srv-08 para usar nos testes 2 e 3.
+
+Esperado: 200 — lista com 8 servidores.
+
+2. Buscar servidor válido por ID
+GET /deploy/servidores/{id_do_srv-01}
+Esperado: 200 — dados do servidor com hostname: "srv-01" e versaoInstalada: "v2.1.0".
+
+3. Buscar servidor legado por ID
+GET /deploy/servidores/{id_do_srv-08}
+Esperado: 200 — dados do servidor com hostname: "srv-08" e versaoInstalada: "v1.0.0".
+
+4. Buscar servidor inexistente
+GET /deploy/servidores/id-inexistente
+Esperado: 404 — sem body.
+
+5. Verificar consistência do deploy
+GET /deploy/verificar
+Esperado: 409 — "Deploy inconsistente. Há servidores com versão divergente."
+
+O srv-08 com versão v1.0.0 diverge da versão homologada v2.1.0, reproduzindo o cenário do desastre KCG.
+
+
+6. Listar auditoria (estado inicial)
+GET /trading/auditoria
+Esperado: 200 — lista com 5 registros pré-carregados do MockData.
+
+7. Enviar ordem — cenário feliz
+POST /trading/ordem
+Content-Type: application/json
+
+{
+  "tickerAcao": "AAPL",
+  "quantidade": 100,
+  "servidorId": "srv-01"
+}
+Esperado: 200 — { "status": "APROVADO", "mensagem": "Ordem processada com sucesso." }
+
+8. Enviar ordem — valor acima do limite
+POST /trading/ordem
+Content-Type: application/json
+
+{
+  "tickerAcao": "JPM",
+  "quantidade": 8500000,
+  "servidorId": "srv-02"
+}
+Esperado: 500 — AnomaliaDetectadaException: "Valor da ordem ultrapassa o limite permitido."
+
+9. Enviar ordem — servidor legado
+POST /trading/ordem
+Content-Type: application/json
+
+{
+  "tickerAcao": "GOOGL",
+  "quantidade": 50,
+  "servidorId": "srv-08"
+}
+Esperado: 500 — DeployInconsistenteException: "Servidor srv-08 está com versão não homologada!"
+
+10. Enviar ordem — servidor inexistente
+POST /trading/ordem
+Content-Type: application/json
+
+{
+  "tickerAcao": "TSLA",
+  "quantidade": 10,
+  "servidorId": "srv-99"
+}
+Esperado: 500 — RuntimeException: "Servidor não encontrado: srv-99"
+
+11. Iniciar operações (processa todas as ordens do MockData)
+POST /trading/iniciar
+Esperado: 500 — falha ao processar ord-02 (srv-08 com versão legada), operações interrompidas automaticamente.
+
+12. Interromper operações manualmente (Kill Switch)
+POST /trading/interromper
+Esperado: 200 — "Operações interrompidas manualmente."
+
+13. Listar auditoria (estado final)
+GET /trading/auditoria
+Esperado: 200 — lista com os 5 registros iniciais mais todos os eventos gerados pelos testes 7 a 12, incluindo ORDEM_ENVIADA, ANOMALIA_DETECTADA, ORDEM_REJEITADA e OPERACAO_INTERROMPIDA.

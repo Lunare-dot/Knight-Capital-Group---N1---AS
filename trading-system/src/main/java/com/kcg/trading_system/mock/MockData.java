@@ -78,7 +78,7 @@ public class MockData {
             ),
             new RegistroAuditoria(
                     RegistroAuditoria.TipoEvento.OPERACAO_INTERROMPIDA,
-                    "Operações do servidor srv-08 interrompidas automaticamente pelo circuit breaker.",
+                    "Operações do servidor srv-08 interrompidas automaticamente.",
                     LocalDateTime.now().minusMinutes(19),
                     null
             )

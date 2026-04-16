@@ -13,7 +13,7 @@ public class OrdemRequestDTO {
     public OrdemRequestDTO() {}
 
     public String getTickerAcao() { return tickerAcao; }
-    public void returnTickerAcao(String tickerAcao) { this.tickerAcao = tickerAcao; }
+    public void setTickerAcao(String tickerAcao) { this.tickerAcao = tickerAcao; }
 
     public Long getQuantidade() { return quantidade; }
     public void setQuantidade(Long quantidade) { this.quantidade = quantidade; }

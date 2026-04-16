@@ -10,11 +10,15 @@ import com.kcg.trading_system.exception.DeployInconsistenteException;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 /**
  * Service responsável por orquestrar as operações de negociação do sistema.
  * Realiza as validações de deploy, análise de anomalias e processamento de ordens,
  * além de registrar eventos de auditoria associados ao fluxo.
  */
+@Service
 public class TradingService {
 
     private final AuditoriaService auditoriaService;
@@ -25,6 +29,7 @@ public class TradingService {
      * 
      * @param auditoriaService serviço responsável pelo registro de eventos.
      */
+    @Autowired
     public TradingService(AuditoriaService auditoriaService) {
         this.auditoriaService = auditoriaService;
     }
@@ -128,7 +133,7 @@ public class TradingService {
      * @throws RuntimeException caso o servidor não seja encontrado
      */
     private Servidor buscarServidor(String servidorId) {
-        Optional<Servidor> servidor = MockData.SERVIDORES.stream().filter(s -> s.getId()
+        Optional<Servidor> servidor = MockData.SERVIDORES.stream().filter(s -> s.getHostname()
                 .equals(servidorId))
                 .findFirst();
 

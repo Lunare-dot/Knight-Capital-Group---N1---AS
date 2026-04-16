@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.kcg.trading_system.mock.MockData;
 import com.kcg.trading_system.model.RegistroAuditoria;
 
@@ -11,6 +13,7 @@ import com.kcg.trading_system.model.RegistroAuditoria;
  * Service responsável pelo registro de eventos de auditoria do sistema.
  * Não contém regras de negócio, apenas registra eventos ocorridos.
  */
+@Service
 public class AuditoriaService {
 
     private final List<RegistroAuditoria> registros = new ArrayList<>(MockData.AUDITORIAS);
