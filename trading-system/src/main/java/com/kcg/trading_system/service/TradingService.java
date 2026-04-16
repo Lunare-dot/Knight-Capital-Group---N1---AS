@@ -133,9 +133,11 @@ public class TradingService {
      * @throws RuntimeException caso o servidor não seja encontrado
      */
     private Servidor buscarServidor(String servidorId) {
-        Optional<Servidor> servidor = MockData.SERVIDORES.stream().filter(s -> s.getHostname()
-                .equals(servidorId))
-                .findFirst();
+        Optional<Servidor> servidor = MockData.SERVIDORES.stream()
+        .filter(s -> 
+            s.getHostname().equalsIgnoreCase(servidorId) ||
+            s.getId().equalsIgnoreCase(servidorId)
+        ).findFirst();
 
         return servidor.orElseThrow(() ->
             new RuntimeException("Servidor não encontrado: " + servidorId)
