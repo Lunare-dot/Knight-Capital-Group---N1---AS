@@ -9,7 +9,7 @@ O objetivo não é replicar o sistema real, mas demonstrar como a aplicação de
 ## Tecnologias
 
 - Java 17+
-- Spring Boot 4.x
+- Spring Boot 3.x
 - Maven
 - Postman (para testes REST)
 
@@ -17,7 +17,9 @@ O objetivo não é replicar o sistema real, mas demonstrar como a aplicação de
 
 ## Arquitetura
 
-O projeto adota uma **Arquitetura em Camadas (N-tier Layered)**, organizada nos seguintes pacotes:
+O sistema segue o modelo **Client-Server**, onde a aplicação Spring Boot atua como servidor REST e os testes (Postman/Newman) representam o cliente/sistema consumidor da API, realizando requisições HTTP para os endpoints expostos.
+
+Internamente, o projeto adota uma **Arquitetura em Camadas (N-tier Layered)**, organizada nos seguintes pacotes:
 
 ```
 com.kcg.trading_system
